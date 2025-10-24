@@ -1,0 +1,10 @@
+{
+  "placeholderImages": [
+    {
+      "id": "ceo-portrait",
+      "description": "A portrait of the company CEO.",
+      "imageUrl": "/images/ceo-portrait.jpg",
+      "imageHint": "ceo portrait"
+    }
+  ]
+}

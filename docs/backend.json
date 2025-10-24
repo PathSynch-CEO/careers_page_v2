@@ -1,0 +1,180 @@
+
+{
+  "entities": {
+    "Job": {
+      "title": "Job",
+      "type": "object",
+      "description": "Represents a job posting within the PathSynch Careers application.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the job posting."
+        },
+        "department": {
+          "type": "string",
+          "description": "The department to which the job belongs."
+        },
+        "city": {
+          "type": "string",
+          "description": "The primary city for the job location."
+        },
+        "state": {
+          "type": "string",
+          "description": "The primary state for the job location."
+        },
+        "remoteOption": {
+          "type": "boolean",
+          "description": "Indicates if the position has a remote work option."
+        },
+        "remoteType": {
+          "type": "string",
+          "description": "The type of remote work arrangement.",
+          "enum": [
+            "fully-remote-no-restrictions",
+            "fully-remote-chosen-locations",
+            "hybrid"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the job."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of when the job was created."
+        },
+        "order": {
+          "type": "number",
+          "description": "The display order of the job."
+        },
+        "applicationMethod": {
+          "type": "string",
+          "description": "The method by which candidates can apply.",
+          "enum": ["enabled", "internal-only", "unlisted", "disabled"]
+        }
+      },
+      "required": [
+        "title",
+        "department",
+        "city",
+        "state",
+        "remoteOption",
+        "description",
+        "createdAt",
+        "order"
+      ]
+    },
+    "Application": {
+      "title": "Application",
+      "type": "object",
+      "description": "Represents a job application submitted by a user.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "Reference to the Job entity."
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The first name of the applicant."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The last name of the applicant."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the applicant.",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "The phone number of the applicant."
+        },
+        "linkedinUrl": {
+          "type": "string",
+          "description": "The LinkedIn profile URL of the applicant.",
+          "format": "uri"
+        },
+        "coverLetter": {
+          "type": "string",
+          "description": "The cover letter submitted by the applicant."
+        },
+        "portfolioUrl": {
+          "type": "string",
+          "description": "The portfolio URL of the applicant.",
+          "format": "uri"
+        },
+        "availableStartDate": {
+          "type": "string",
+          "description": "The date the applicant is available to start.",
+          "format": "date"
+        },
+        "experienceYears": {
+          "type": "string",
+          "description": "The number of years of experience of the applicant."
+        },
+        "resumeUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the application (e.g., submitted, in review, rejected)."
+        },
+        "screeningStatus": {
+          "type": "string",
+          "description": "The AI screening status of the application (e.g., pending, completed)."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The timestamp of when the application was created.",
+          "format": "date-time"
+        },
+        "aiResumeAnalysis": {
+          "type": "object"
+        },
+        "aiCoverLetterAnalysis": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "jobId",
+        "jobTitle",
+        "firstName",
+        "lastName",
+        "email",
+        "phone",
+        "coverLetter",
+        "availableStartDate",
+        "experienceYears",
+        "resumeUrl",
+        "status",
+        "screeningStatus",
+        "createdAt"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "/jobs/{jobId}": {
+      "schema": {
+        "$ref": "#/entities/Job"
+      },
+      "description": "Stores individual job postings."
+    },
+    "/applications/{applicationId}": {
+      "schema": {
+        "$ref": "#/entities/Application"
+      },
+      "description": "Stores job applications submitted by users."
+    }
+  }
+}
